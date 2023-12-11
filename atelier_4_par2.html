@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+</head>
+<body>
+    <h1  style="color:green;"><strong>Formulaire d'inscription  </h1>
+    <form id="inscriptionForm">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required>
+        <p id="nomError" style="color: red;"></p>
+
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required>
+        <p id="prenomError" style="color: red;"></p>
+
+        <label for="address">Adresse :</label>
+        <input type="text" id="address" name="address" required>
+        <br>
+        <br>
+        <label for="tel">Numéro Téléphone :</label>
+        <input type="text" id="tel" name="tel" required>
+        <p id="telError" style="color: red;"></p>
+
+        <label for="birthdate">Date de naissance :</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+        <br>
+        <br>
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required>
+        <p id="emailError" style="color: red;"></p>
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required>
+        <p id="passwordError" style="color: red;"></p>
+
+        <label for="passwordConfirm">Confirmation mot de passe :</label>
+        <input type="password" id="passwordConfirm" name="passwordConfirm" required>
+        <p id="passwordConfirmError" style="color: red;"></p>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+        
+    </form>
+    <script>
+        document.getElementById('inscriptionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var nom = document.getElementById('nom').value;
+            var prenom = document.getElementById('prenom').value;
+            var tel = document.getElementById('tel').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var passwordConfirm = document.getElementById('passwordConfirm').value;
+
+            var isValid = true;
+
+            if (nom.length < 3 || !/^[A-Za-z]+$/.test(nom)) {
+                document.getElementById('nomError').textContent = 'Le nom doit compter au minimum 3 caractères.';
+                isValid = false;
+            } else {
+                document.getElementById('nomError').textContent = '';
+            }
+
+            if (prenom.length < 4 || !/^[A-Za-z]+$/.test(prenom)) {
+                document.getElementById('prenomError').textContent = 'Le prénom doit compter au minimum 4 caractères.';
+                isValid = false;
+            } else {
+                document.getElementById('prenomError').textContent = '';
+            }
+
+            if (!/^\d+$/.test(tel)) {
+                document.getElementById('telError').textContent = 'Le numéro de téléphone ne doit pas contenir des lettres.';
+                isValid = false;
+            } else {
+                document.getElementById('telError').textContent = '';
+            }
+
+            if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/.test(password)) {
+                document.getElementById('passwordError').textContent = 'Le mot de passe doit contenir au moins une minuscule, une majuscule et un chiffre.';
+                isValid = false;
+            } else {
+                document.getElementById('passwordError').textContent = '';
+            }
+
+            if (password !== passwordConfirm) {
+                document.getElementById('passwordConfirmError').textContent = 'Les mots de passe ne correspondent pas.';
+                isValid = false;
+            } else {
+                document.getElementById('passwordConfirmError').textContent = '';
+            }
+
+            if (isValid) {
+                alert('Inscription réussie !');
+            }
+        });
+    </script>
+</body>
+</html>
